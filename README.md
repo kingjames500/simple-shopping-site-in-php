@@ -1,1 +1,0 @@
-# simple-shopping-site-in-php
