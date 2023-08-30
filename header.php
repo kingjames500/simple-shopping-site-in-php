@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <header class="header">
 
    <div class="flex">
@@ -7,6 +11,7 @@
       <nav class="navbar">
          <a href="admin.php">add products</a>
          <a href="products.php">view products</a>
+         <a href="logout.php">logout</a>
       </nav>
 
       <?php
