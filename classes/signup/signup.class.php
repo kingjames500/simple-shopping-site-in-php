@@ -12,7 +12,7 @@ class Signup extends dbConnect{
             header("location: ../signup.php?error=stmtFailed");
             exit();
             # code...
-        } 
+        }
         $stmt = null;                                                     
     }
 

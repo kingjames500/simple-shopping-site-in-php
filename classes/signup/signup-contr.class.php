@@ -7,6 +7,7 @@ class SignupContr extends Signup
     private $pwd;
     private $password;
     private $email;
+    
 
     public function __construct($uid, $pwd, $password, $email){
         $this->uid = $uid;
@@ -54,6 +55,17 @@ class SignupContr extends Signup
         }
         return $result;   
     }
+    //checking password length
+    private function passwordLength(){
+        $result;
+        if (strlen($this->password && $this->pwd) <= 5) {
+            $result = false;
+        }
+        else{
+            $result = true;
+        }
+        return $result;
+    }
     public function newUser(){
         if ($this->usernameAlreadyRegistered() == false) {
             header("location: ../login.php?error=userExist");
@@ -73,8 +85,12 @@ class SignupContr extends Signup
                 header("location: ../index.php?error=inavlid email address");
                 exit();
             }
+            if ($this->passwordLength() == false) {
+                header("location: ../index.php?error=passwordDoNotMeetMinimumRequirement");
+                exit();
+            }
         }
-        $this->registerUser($this->uid, $this->pwd, $this->email);
+        $this->registerUser($this->email, $this->uid, $this->password);
         
     }
     

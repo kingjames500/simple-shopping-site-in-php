@@ -2,7 +2,7 @@
 
 class Login extends dbConnect{
     protected function userLogin($email, $password){
-        $stmt = $this->connect()->prepare("SELECT password FROM users WHERE email = ? OR username = ?");
+        $stmt = $this->connect()->prepare("SELECT password FROM users WHERE email = ? OR password = ?");
         if (!$stmt->execute(array($email, $password))) {
             $stmt = null;
             echo "Error: " . $stmt->errorCode();
@@ -25,7 +25,7 @@ class Login extends dbConnect{
         }
         elseif ($checkPassword == true) {
             $stmt = $this->connect()->prepare("SELECT * FROM users WHERE email = ? OR username = ? AND password = ?");
-           if (!$stmt->execute(array($email, $password, $password))) {
+           if (!$stmt->execute(array($email, $email, $password))) {
                 $stmt = null;
                 echo "Error: " . $stmt->errorCode();   
                 header("location: ../login.php?error=stmtFailed2");     
@@ -41,9 +41,10 @@ class Login extends dbConnect{
 
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
             session_start();
-            $_SESSION["name"] = $user["user_username"];
-            $_SESSION["email"] = $user["users_email"];
-            $_SESSION["usersId"] = $user["id"];
+            $_SESSION["name"] = $user["username"];
+            $_SESSION["email"] = $user["email"];
+            $_SESSION["usersId"] = $user["users_id"];
+            header("location: ../products.php?login=success");
         }
 
         $stmt = null;

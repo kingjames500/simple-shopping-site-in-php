@@ -49,4 +49,11 @@ class Products extends dbConnect{
         }
         $stmt = null;
     }
+    protected function getAllProducts(){
+        $stmt = $this->connect()->prepare("SELECT * FROM products");
+        if (!$stmt->execute()) {
+            echo '<script>alert("Internal Server Error");</script>';
+            
+        }
+    }
 }

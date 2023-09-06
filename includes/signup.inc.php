@@ -8,10 +8,19 @@ if (isset($_POST["submit"])) {
 
     //instantiating the class
 
-    include __DIR__ . "../classes/dhb.class.php";
-    include __DIR__ . "../classes/signup/signup.class.php";
-    include __DIR__ . "../classes/signup/signup-contr.class.php";
+    include  "../classes/dhb.class.php";
+    include  "../classes/signup/signup.class.php";
+    include "../classes/signup/signup-contr.class.php";
 
     $signup = new signupContr($uid, $pwd, $pwdRepeat, $email);
     $signup->newUser();
+
+    if ($signup == true) {
+        header(
+            "location: ./login.php?msg=userRegisteredSuccessful"
+        );
+    }
+    else {
+        echo "an error occurred while trying to register";
+    }
 }
