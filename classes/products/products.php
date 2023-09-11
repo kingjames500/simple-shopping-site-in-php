@@ -53,7 +53,7 @@ class Products extends dbConnect{
         $stmt = $this->connect()->prepare("SELECT * FROM products");
         if (!$stmt->execute()) {
             echo '<script>alert("Internal Server Error");</script>';
-            
+            echo 'wi'
         }
     }
 }
